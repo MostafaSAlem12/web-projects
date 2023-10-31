@@ -3,24 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Ticker</title>
   </head>
   <body>
     <h2 style="opacity: 0.5" id="ticker"></h2>
   </body>
 
   <script>
+	let interval;
     const t = document.getElementById("ticker");
     const ticker = () => {
       const diff = new Date("2023-12-1").getTime() - Date.now();
       const date = new Date(diff);
-      if (diff === 0) return;
+      if (diff <= 0) {
+	t.innerHTML = '0:00:00:00:000'
+	clearInterval(interval);
+      }
+else {
       t.innerHTML = `${Math.floor(
         date.getTime() / (1000 * 3600 * 24)
-      )}:${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.${date.getMilliseconds()}`;
+      )}:${date.getUTCHours()}:${date.getMinutes()}:${date.getSeconds()}.${date.getMilliseconds()}`;
+}
     };
-
-    const interval = setInterval(ticker, 1);
-    if (t.innerHTMl === "0") clearInterval(interval);
+    interval = setInterval(ticker, 1);
   </script>
 </html>

@@ -15,7 +15,6 @@ const httpsOptions = {
 const index = require("./routes/index");
 
 const server = https.createServer(httpsOptions, app);
-
 const io = socketIO(server);
 
 config();
@@ -31,7 +30,6 @@ mongoose
   .catch((err) => {
     console.log("DB not connectd:", err);
   });
-
 app.use(cors());
 app.use(limiter);
 app.use(express.json());
@@ -46,11 +44,10 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  socket.on("connection", (data) => {
-    socket.user = data.user;
-    socket.join(socket.user);
-    console.log(socket.user, "connected");
-  });
+  const { user } = socket.handshake.query;
+  socket.user = user;
+  console.log(socket.user, "connected");
+  socket.join(socket.user);
   socket.on("disconnect", () => {
     socket.leave(socket.user);
     io.emit("user-disconnected", `${socket.user} disconnected`);

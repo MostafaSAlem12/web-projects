@@ -98,6 +98,11 @@ class _MyHomePageState extends State<MyHomePage> {
       difference = DateTime(year, _month, _day).difference(DateTime.now());
       days = difference.inDays;
     }
+    while (days > 366) {
+      year--;
+      difference = DateTime(year, _month, _day).difference(DateTime.now());
+      days = difference.inDays;
+    }
     hours = 23 - DateTime.now().hour;
     minutes = 59 - DateTime.now().minute;
     seconds = 59 - DateTime.now().second;

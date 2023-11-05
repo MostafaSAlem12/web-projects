@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   const { user } = socket.handshake.query;
-  socket.user = user;
+  socket.user = decodeURIComponent(user);
   console.log(socket.user, "connected");
   socket.join(socket.user);
   socket.on("disconnect", () => {

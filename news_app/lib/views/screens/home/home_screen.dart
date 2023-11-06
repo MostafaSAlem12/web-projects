@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:news_app/controllers/home/home_controller.dart';
+import 'package:news_app/views/screens/home/tabs/settings_tab.dart';
 import 'package:news_app/views/screens/home/tabs/top_headline_tab.dart';
 import 'package:news_app/views/widgets/home/globe/empty_globe_widget.dart';
 import 'package:news_app/views/widgets/home/trend/empty_trend_widget.dart';
@@ -62,7 +63,7 @@ class HomeScreen extends StatelessWidget {
       case 2:
         return const EmptyGlobeWidget();
       default:
-        return const SizedBox();
+        return const SettingsTab();
     }
   }
 }

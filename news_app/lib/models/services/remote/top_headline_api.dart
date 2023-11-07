@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:news_app/core/constants/urls.dart';
@@ -16,7 +15,6 @@ class TopHeadlineApi extends GetConnect {
       if (response.statusCode != 200 && response.statusCode != 201) {
         throw Exception('Something went wrong');
       }
-      print(response.status.code);
       // final List<Map<String, dynamic>> data =
       //     jsonDecode(response.body)["articles"];
       // final List<Article> articles =

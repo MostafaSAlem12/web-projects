@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:readmore/readmore.dart';
 
 class ArticleCardWidget extends StatelessWidget {
   final String title;
@@ -16,7 +15,6 @@ class ArticleCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(heroTag);
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),

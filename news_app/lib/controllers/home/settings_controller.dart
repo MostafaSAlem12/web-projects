@@ -1,6 +1,9 @@
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:news_app/core/themes/theme_controller.dart';
 
 class SettingsController extends GetxController {
+  final ThemeController themeController = Get.find<ThemeController>();
   //Theme
   bool _isSystemTheme = true;
   bool get isSystemTheme => _isSystemTheme;
@@ -25,6 +28,15 @@ class SettingsController extends GetxController {
 
   void toggleSystemTheme(bool _) {
     _isSystemTheme = !_isSystemTheme;
+    if (_isSystemTheme) {
+      themeController.setThemeMode(ThemeMode.system);
+    } else {
+      if (_isDarkMode) {
+        themeController.setThemeMode(ThemeMode.dark);
+      } else {
+        themeController.setThemeMode(ThemeMode.light);
+      }
+    }
     update();
   }
 
@@ -40,6 +52,11 @@ class SettingsController extends GetxController {
 
   void toggleDarkMode(bool _) {
     _isDarkMode = !_isDarkMode;
+    if (_isDarkMode) {
+      themeController.setThemeMode(ThemeMode.dark);
+    } else {
+      themeController.setThemeMode(ThemeMode.light);
+    }
     update();
   }
 

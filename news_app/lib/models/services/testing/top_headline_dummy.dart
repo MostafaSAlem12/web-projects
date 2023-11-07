@@ -1,5 +1,5 @@
 class TopHeadlineDummy {
-  static const List<Map<String, dynamic>> articles_us = [
+  static const List<Map<String, dynamic>> articlesUs = [
     {
       "source": {"id": "bbc-news", "name": "BBC News"},
       "author": "BBC News",
@@ -135,7 +135,7 @@ class TopHeadlineDummy {
           "US President Joe Biden has arrived in Maine to meet with families and first responders a week after a devastating mass shooting left 18 dead.\r\nThe 25 October attack at a bowling alley and bar in the … [+3536 chars]"
     }
   ];
-  static const List<Map<String, dynamic>> articles_eg = [
+  static const List<Map<String, dynamic>> articlesEg = [
     {
       "source": {"id": "google-news", "name": "Google News"},
       "author": "سعودي صح",

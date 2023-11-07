@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 import 'package:news_app/core/routes/pages.dart';
+import 'package:news_app/core/themes/theme_controller.dart';
+import 'package:news_app/core/themes/themes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,15 +15,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Get.put(ThemeController());
     return GetMaterialApp(
       title: 'News App',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        highlightColor: Colors.transparent,
-        splashFactory: InkRipple.splashFactory,
-        primarySwatch: Colors.red,
-      ),
+      themeMode: AppThemes.themeMode,
+      theme: AppThemes.lightTheme,
+      darkTheme: AppThemes.darkTheme,
       getPages: AppPages.pages,
       initialRoute: AppPages.initial,
     );

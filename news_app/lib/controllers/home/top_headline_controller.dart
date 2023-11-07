@@ -58,7 +58,7 @@ class TopHeadlineController extends GetxController {
       _status = Status.loading;
       update();
       final List<Article> articles =
-          TopHeadlineDummy.articles_us.map((e) => Article.fromJson(e)).toList();
+          TopHeadlineDummy.articlesUs.map((e) => Article.fromJson(e)).toList();
       _articles.addAll(articles);
       _status = Status.success;
       _page++;

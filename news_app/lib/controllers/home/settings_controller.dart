@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/core/themes/theme_controller.dart';
+import 'package:news_app/core/themes/themes.dart';
 
 class SettingsController extends GetxController {
   final ThemeController themeController = Get.find<ThemeController>();
   //Theme
-  bool _isSystemTheme = true;
+  bool _isSystemTheme = AppThemes.themeMode == ThemeMode.system;
   bool get isSystemTheme => _isSystemTheme;
-  bool _isDarkMode = false;
+  bool _isDarkMode = AppThemes.isDarkTheme;
   bool get isDarkMode => _isDarkMode;
 
   //Locale
@@ -57,6 +58,7 @@ class SettingsController extends GetxController {
     } else {
       themeController.setThemeMode(ThemeMode.light);
     }
+    AppThemes.setDarkTheme(_isDarkMode);
     update();
   }
 

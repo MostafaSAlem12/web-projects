@@ -21,58 +21,82 @@ class TopHeadlineTab extends StatelessWidget {
         switch (controller.status) {
           case Status.success:
             if (controller.articles.isNotEmpty) {
-              return ListView.builder(
-                  key: controller.storageKey,
-                  padding: padding,
-                  controller: controller.listController,
-                  itemCount: controller.articles.length + 1,
-                  itemBuilder: (context, index) {
-                    if (index == controller.articles.length) {
-                      return const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'End of results',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      );
-                    }
-                    final Article article = controller.articles[index];
-                    return ArticleWidget(
-                      article: article,
-                      index: index,
-                      onTap: () {
-                        controller.toArticlePage(index);
-                      },
-                    );
-                  });
+              return ListView(
+                key: controller.storageKey,
+                padding: padding,
+                controller: controller.listController,
+                children: [
+                  const Text(
+                    'Breaking',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: controller.articles.length + 1,
+                      itemBuilder: (context, index) {
+                        if (index == controller.articles.length) {
+                          return const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'End of results',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        }
+                        final Article article = controller.articles[index];
+                        return ArticleWidget(
+                          article: article,
+                          index: index,
+                          onTap: () {
+                            controller.toArticlePage(index);
+                          },
+                        );
+                      }),
+                ],
+              );
             } else {
               return const EmptyTopHeadlineWidget();
             }
           case Status.loading:
             if (controller.articles.isNotEmpty) {
-              return ListView.builder(
+              return ListView(
                 key: controller.storageKey,
                 padding: padding,
                 controller: controller.listController,
-                itemCount: controller.articles.length + 1,
-                itemBuilder: (context, index) {
-                  if (index == controller.articles.length &&
-                      controller.status == Status.loading) {
-                    return const CardLoadingWidget();
-                  }
-                  final Article article = controller.articles[index];
-                  return ArticleWidget(
-                    article: article,
-                    index: index,
-                    onTap: () {
-                      controller.toArticlePage(index);
+                children: [
+                  const Text(
+                    'Breaking',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: controller.articles.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == controller.articles.length &&
+                          controller.status == Status.loading) {
+                        return const CardLoadingWidget();
+                      }
+                      final Article article = controller.articles[index];
+                      return ArticleWidget(
+                        article: article,
+                        index: index,
+                        onTap: () {
+                          controller.toArticlePage(index);
+                        },
+                      );
                     },
-                  );
-                },
+                  ),
+                ],
               );
             } else {
               return const PageLoadingWidget(

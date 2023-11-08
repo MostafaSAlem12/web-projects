@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 class AppThemes {
   static ThemeMode themeMode = ThemeMode.system;
@@ -23,4 +24,23 @@ class AppThemes {
     //   brightness: Brightness.dark,
     // ),
   );
+
+  static bool isDarkTheme = false;
+
+  AppThemes.initialize() {
+    final String themeModeData = GetStorage().read<String>('theme') ?? 'system';
+    isDarkTheme = GetStorage().read<bool>('isDarkTheme') ?? false;
+    print(themeModeData);
+    themeMode = ThemeMode.values.byName(themeModeData);
+  }
+
+  static void setTheme(ThemeMode mode) {
+    themeMode = mode;
+    GetStorage().write('theme', mode.name);
+  }
+
+  static void setDarkTheme(bool isDark) {
+    isDarkTheme = isDark;
+    GetStorage().write('isDarkTheme', isDark);
+  }
 }

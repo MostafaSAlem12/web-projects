@@ -4,7 +4,7 @@ import 'package:news_app/core/themes/themes.dart';
 
 class ThemeController extends GetxController {
   void setThemeMode(ThemeMode mode) {
-    AppThemes.themeMode = mode;
+    AppThemes.setTheme(mode);
     Get.changeThemeMode(mode);
     update();
   }

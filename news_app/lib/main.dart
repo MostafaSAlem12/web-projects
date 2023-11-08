@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:news_app/core/routes/pages.dart';
 import 'package:news_app/core/themes/theme_controller.dart';
 import 'package:news_app/core/themes/themes.dart';
+import 'package:news_app/core/utils/services.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
+  AppServices.init();
   runApp(const MyApp());
 }
 

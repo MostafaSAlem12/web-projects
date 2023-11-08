@@ -6,12 +6,15 @@ class CardLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey.shade300,
-      highlightColor: Colors.grey.shade200,
-      child: const SizedBox(
-        height: 180,
-        child: Card(),
+    return Opacity(
+      opacity: 0.5,
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade200,
+        child: const SizedBox(
+          height: 180,
+          child: Card(),
+        ),
       ),
     );
   }

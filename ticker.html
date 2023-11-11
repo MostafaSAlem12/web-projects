@@ -3,27 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
     <title>Ticker</title>
   </head>
   <body>
-    <h2 style="opacity: 0.5" id="ticker"></h2>
+    <div class="mt-5 p-5 d-flex justify-content-center">
+      <div class="w-50 card text-center">
+        <div class="card-header">
+          <h3 class="text-muted">Period until: 1/12/2023</h3>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Days</th>
+                <th scope="col">Hours</th>
+                <th scope="col">Minutes</th>
+                <th scope="col">Seconds</th>
+                <th scope="col">Milliseconds</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><h2 style="opacity: 0.5" id="ticker-day"></h2></td>
+                <td><h2 style="opacity: 0.5" id="ticker-hour"></h2></td>
+                <td><h2 style="opacity: 0.5" id="ticker-minute"></h2></td>
+                <td><h2 style="opacity: 0.5" id="ticker-second"></h2></td>
+                <td><h2 style="opacity: 0.5" id="ticker-millisecond"></h2></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </body>
 
   <script>
-	let interval;
-    const t = document.getElementById("ticker");
+    let interval;
+    const day = document.getElementById("ticker-day");
+    const hour = document.getElementById("ticker-hour");
+    const minute = document.getElementById("ticker-minute");
+    const second = document.getElementById("ticker-second");
+    const millisecond = document.getElementById("ticker-millisecond");
+    let year = new Date().getFullYear();
     const ticker = () => {
-      const diff = new Date("2023-12-1").getTime() - Date.now();
+      const diff = new Date(`${year}-12-1`).getTime() - Date.now();
       const date = new Date(diff);
       if (diff <= 0) {
-	t.innerHTML = '0:00:00:00:000'
-	clearInterval(interval);
+        day.innerHTML = "00";
+        hour.innerHTML = "00";
+        minute.innerHTML = "00";
+        second.innerHTML = "00";
+        millisecond.innerHTML = "000";
+        clearInterval(interval);
+      } else {
+        day.innerHTML = `${Math.floor(date.getTime() / (1000 * 3600 * 24))
+          .toString()
+          .padStart(2, "0")}`;
+        hour.innerHTML = `${date.getUTCHours().toString().padStart(2, "0")}`;
+        minute.innerHTML = `${date.getMinutes().toString().padStart(2, "0")}`;
+        second.innerHTML = `${date.getSeconds().toString().padStart(2, "0")}`;
+        millisecond.innerHTML = `${date
+          .getMilliseconds()
+          .toString()
+          .padStart(3, "0")}`;
       }
-else {
-      t.innerHTML = `${Math.floor(
-        date.getTime() / (1000 * 3600 * 24)
-      )}:${date.getUTCHours()}:${date.getMinutes()}:${date.getSeconds()}.${date.getMilliseconds()}`;
-}
     };
     interval = setInterval(ticker, 1);
   </script>
